@@ -22,6 +22,9 @@ Rails.application.routes.draw do
     end
   end
   resources :music_cards do
+    get 'edit_title', to: 'cards#edit_title'
+    get 'edit_auther_name', to: 'cards#edit_auther_name'
+    get 'edit_card_img', to: 'cards#edit_card_img'
     resources :musics do
       post 'moveup', to: 'musics#moveup'
       post 'movedown', to: 'musics#movedown'

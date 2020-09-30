@@ -45,7 +45,8 @@ ActiveRecord::Schema.define(version: 2020_09_29_184436) do
   end
 
   create_table "license_groups", force: :cascade do |t|
-    t.integer "card_id", null: false
+    t.integer "card_id"
+    t.integer "music_card_id"
     t.integer "number_of_licenses", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false

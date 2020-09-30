@@ -3,6 +3,10 @@ class MusicCardsController < ApplicationController
     @music_cards = current_user.music_cards
   end
 
+  def show
+    @card = MusicCard.find_by(id: params[:id], user_id: current_user.id)
+  end
+
   def new
     @music_card = MusicCard.new()
   end
@@ -18,6 +22,29 @@ class MusicCardsController < ApplicationController
     end
 
     redirect_to music_card_musics_url(@music_card), notice: "カードが登録されました"
+  end
+
+  def edit_title
+    @card = MusicCard.find_by(id: params[:music_card_id], user_id: current_user.id)
+  end
+
+  def edit_auther_name
+    @card = MusicCard.find_by(id: params[:music_card_id], user_id: current_user.id)
+  end
+
+  def edit_card_img
+    @card = MusicCard.find_by(id: params[:music_card_id], user_id: current_user.id)
+  end
+
+  def update
+    card = MusicCard.find_by(id: params[:id], user_id: current_user.id)
+    flag = card.update(card_params)
+    if flag
+    else
+      redirect_to music_card_url(card), alert: "更新に失敗しました"
+      return
+    end
+    redirect_to music_card_url(card), notice: "更新しました。"
   end
 
   private

@@ -3,6 +3,11 @@ class CardsController < ApplicationController
     @cards = current_user.cards
   end
 
+  def show
+    # 他の人がアップしているカードを見れない様にする
+    @card = Card.find_by(id: params[:id], user_id: current_user.id)
+  end
+
   def edit_title
     @card = Card.find_by(id: params[:card_id], user_id: current_user.id)
   end
@@ -30,23 +35,11 @@ class CardsController < ApplicationController
     redirect_to card_url(card), notice: "更新しました。"
   end
 
-  def edit
-    @card = Card.find_by(id: params[:id], user_id: current_user.id)
-  end
-
-  def show
-    # 他の人がアップしているカードを見れない様にする
-    @card = Card.find_by(id: params[:id], user_id: current_user.id)
-  end
-
   def destroy
     card = Card.find_by(id: params[:id], user_id: current_user.id)
     # Todo:関連する物の削除
     card.destroy!
     redirect_to cards_url
-  end
-
-  def select
   end
 
   def new
@@ -64,6 +57,9 @@ class CardsController < ApplicationController
     end
 
     redirect_to new_card_license_group_url(@card), notice: "カードが登録されました"
+  end
+
+  def select
   end
 
   private
