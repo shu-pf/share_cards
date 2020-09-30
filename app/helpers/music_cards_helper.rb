@@ -1,0 +1,2 @@
+module MusicCardsHelper
+end

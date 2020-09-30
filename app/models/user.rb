@@ -5,5 +5,6 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable, :confirmable
 
   has_many :cards
+  has_many :music_cards
   has_many :licenses
 end

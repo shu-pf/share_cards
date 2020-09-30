@@ -11,13 +11,13 @@
 <main>
   <div class="container">
     <h2 class="my-3">新しいカードを作成</h2>
-    <%=form_with model: @music_card,url: cards_new_music_path, local: true do |f|%>
+    <%=form_with model: @music_card, local: true do |f|%>
       <div class="form-group">
-        <%= f.label "タイトル" %>
+        <%= f.label "タイトル*" %>
         <%= f.text_field :title, class: "form-control", id: "title"%>
       </div>
       <div class="form-group">
-        <%= f.label "アーティスト名" %>
+        <%= f.label "アーティスト名*" %>
         <%= f.text_field :artist_name, class: "form-control", id: "auther_name"%>
       </div>
       <h3>表面のデザイン設定</h3>

@@ -2,11 +2,11 @@
   <div class="container">
     <h2 class="my-3">発行済みカード一覧</h2>
     <div class="mb-2">
-      <%=link_to "音楽・音声", music_cards_index_path, class: "btn btn-primary btn-outline"%>
-      <%=link_to "その他", cards_path, class: "btn btn-primary btn-raised"%>
+      <%=link_to "音楽・音声", music_cards_index_path, class: "btn btn-primary btn-raised"%>
+      <%=link_to "その他", cards_path, class: "btn btn-primary btn-outline"%>
     </div>
     <div class="d-md-none">
-      <% @cards.each do |card| %>
+      <% @music_cards.each do |card| %>
       <div class="row mb-2 border-top pt-2">
         <div class="col-4">
           <div class="pr-1 text-center">
@@ -15,9 +15,9 @@
         </div>
         <div class="col-8">
           <h4><%=card.title%></h4>
-          <p style="margin-bottom: 3px;"><%=card.auther_name%></p>
+          <p style="margin-bottom: 3px;"><%=card.artist_name%></p>
           <div class="text-right">
-            <%= link_to "詳細", card_path(card) ,class: "btn btn-primary btn-outline btn-sm"%>
+            <%= link_to "詳細", music_card_path(card) ,class: "btn btn-primary btn-outline btn-sm"%>
             <%= link_to "削除", card ,class: "btn btn-danger btn-outline btn-sm", method: :delete, data: { confirm: "削除してもよろしいですか？"} %>
           </div>
         </div>
@@ -26,16 +26,16 @@
     </div>
     <div class="d-none d-md-block">
       <div class="row">
-      <% @cards.each do |card| %>
+      <% @music_cards.each do |card| %>
         <div class="col-md-4 mb-3">
           <div class="card" style="max-width: 25rem;">
             <%= image_tag card.card_img.variant(resize:'350x200').processed, class: "card-img-top", style: "object-fit: contain;height: 200px;" if card.card_img.attached? %>
             <div class="card-body">
               <h4 class="card-title"><%=card.title%></h4>
-              <h6 class="card-subtitle"><%=card.auther_name%></h6>
+              <h6 class="card-subtitle"><%=card.artist_name%></h6>
               <p class="card-text"></p>
               <div class="text-right">
-                <%= link_to "詳細", card_path(card) ,class: "btn btn-primary btn-outline btn-sm"%>
+                <%= link_to "詳細", music_card_path(card) ,class: "btn btn-primary btn-outline btn-sm"%>
                 <%= link_to "削除", card ,class: "btn btn-danger btn-outline btn-sm", method: :delete, data: { confirm: "本当に削除してもよろしいですか？(カードを所持しているユーザーが使用できなくなります)"} %>
               </div>
             </div>
@@ -44,7 +44,7 @@
       <% end %>
       </div>
     </div>
-    <% if @cards.empty? %>
+    <% if @music_cards.empty? %>
     <div class="text-center my-5">
       <h4>まだカードを作成していません。</h4>
     </div>

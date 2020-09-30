@@ -3,9 +3,6 @@ class CardsController < ApplicationController
     @cards = current_user.cards
   end
 
-  def new_music
-  end
-
   def edit_title
     @card = Card.find_by(id: params[:card_id], user_id: current_user.id)
   end
@@ -54,7 +51,6 @@ class CardsController < ApplicationController
 
   def new
     @card = Card.new()
-    @license_group = LicenseGroup.new()
   end
 
   def create

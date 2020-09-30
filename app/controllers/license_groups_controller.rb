@@ -41,7 +41,8 @@ class LicenseGroupsController < ApplicationController
     @card = Card.find(params[:card_id])
     @license_group = LicenseGroup.find(params[:license_group_id])
   end
-  
+
+  # カードの生成処理
   def download_front
     card = Card.find(params[:card_id])
     license_group = LicenseGroup.find(params[:license_group_id])
