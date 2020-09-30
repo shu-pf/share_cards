@@ -38,7 +38,7 @@ class MusicCardsController < ApplicationController
 
   def update
     card = MusicCard.find_by(id: params[:id], user_id: current_user.id)
-    flag = card.update(card_params)
+    flag = card.update(music_card_params)
     if flag
     else
       redirect_to music_card_url(card), alert: "更新に失敗しました"
@@ -50,6 +50,12 @@ class MusicCardsController < ApplicationController
   private
 
   def music_card_params
-    params.require(:music_card).permit(:title, :artist_name, :card_img)
+    if params[:music_card]
+      params.require(:music_card).permit(:title, :artist_name, :card_img)
+    else
+      # contentがからの場合の処理
+      # とりあえずなので要修正
+      params[:music_card] = {title: ""}
+    end
   end
 end

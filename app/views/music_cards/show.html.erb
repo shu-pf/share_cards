@@ -2,7 +2,7 @@
   <div class="container">
     <h2 class="my-3"><%=@card.title%></h2>
     <h5><%=@card.artist_name%></h5>
-    <%=link_to "一覧画面に戻る", cards_path, class: "btn btn-primary btn-outline"%>
+    <%=link_to "一覧画面に戻る", music_cards_index_path, class: "btn btn-primary btn-outline"%>
     <div class="text-center mb-3">
       <%= image_tag @card.card_img, style: "max-width: 100%; max-height: 379px;" if @card.card_img.attached? %>
     </div>
@@ -24,7 +24,7 @@
             <td><%=@card.title%></td>
             <td>
               <div class="text-right">
-                <%=link_to "編集", card_edit_title_path(@card), class: "btn btn-success btn-outline"%>
+                <%=link_to "編集", music_card_edit_title_path(@card), class: "btn btn-success btn-outline"%>
               </div>
             </td>
           </tr>
@@ -33,12 +33,28 @@
             <td><%=@card.artist_name%></td>
             <td>
               <div class="text-right">
-                <%=link_to "編集", card_edit_auther_name_path(@card), class: "btn btn-success btn-outline"%>
+                <%=link_to "編集", music_card_edit_auther_name_path(@card), class: "btn btn-success btn-outline"%>
               </div>
             </td>
           </tr>
         </tbody>
       </table>
+    </section>
+    <section>
+      <h4>楽曲・音声情報</h4>
+      <table class="table table-hover">
+        <tbody>
+          <% @card.musics.order(track_number: "ASC").each do |music| %>
+          <tr>
+            <td><%=music.track_number%></td>
+            <td><%=music.title%></td>
+          </tr>
+          <%end%>
+        </tbody>
+      </table>
+      <div class="text-right mb-3">
+        <%=link_to "詳細設定" , music_card_musics_path(@card), class: "btn btn-primary btn-outline"%>
+      </div>
     </section>
     <section>
       <h4>カードの再印刷と新規作成</h4>
@@ -57,8 +73,8 @@
             <td><%=license_group.number_of_licenses%></td>
             <td>
               <div class="text-right">
-                <%=link_to "再印刷", card_license_group_download_path(@card, license_group), class: "btn btn-primary btn-raised"%>
-                <%=link_to "削除", card_license_group_path(@card, license_group),method: :delete , class: "btn btn-danger", data: { confirm: "本当に削除してもよろしいですか？既にカードを配布している場合はそのカードは使用出来なくなります。"}%>
+                <%#=link_to "再印刷", card_license_group_download_path(@card, license_group), class: "btn btn-primary btn-raised"%>
+                <%#=link_to "削除", card_license_group_path(@card, license_group),method: :delete , class: "btn btn-danger", data: { confirm: "本当に削除してもよろしいですか？既にカードを配布している場合はそのカードは使用出来なくなります。"}%>
               </div>
             </td>
           </tr>
@@ -67,7 +83,7 @@
       </table>
     </section>
     <div class="text-right mb-3">
-      <%=link_to "カードを追加作成する" ,new_card_license_group_path(@card), class: "btn btn-primary btn-outline"%>
+      <%=link_to "カードを追加作成する" , new_music_card_music_card_license_group_path(@card), class: "btn btn-primary btn-outline"%>
     </div>
   </div>
 </main>

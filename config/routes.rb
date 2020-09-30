@@ -22,9 +22,14 @@ Rails.application.routes.draw do
     end
   end
   resources :music_cards do
-    get 'edit_title', to: 'cards#edit_title'
-    get 'edit_auther_name', to: 'cards#edit_auther_name'
-    get 'edit_card_img', to: 'cards#edit_card_img'
+    get 'edit_title', to: 'music_cards#edit_title'
+    get 'edit_auther_name', to: 'music_cards#edit_auther_name'
+    get 'edit_card_img', to: 'music_cards#edit_card_img'
+    resources :music_card_license_groups do
+      get 'download', to: 'license_groups#download'
+      get 'download_front', to: 'license_groups#download_front'
+      get 'download_back', to: 'license_groups#download_back'
+    end
     resources :musics do
       post 'moveup', to: 'musics#moveup'
       post 'movedown', to: 'musics#movedown'
